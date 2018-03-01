@@ -12,7 +12,6 @@
 	float2 _VerticalJump; // amount, timing
 	float _HorizontalShake;
 	float2 _ColourDrift; // amount, timing
-
 	float nrand(float x, float y)
 	{
 		return frac(sin(dot(float2(x, y), float2(12.9898, 78.233)))*43758.5453);
@@ -27,12 +26,12 @@
 		// Vertical Jump
 		float jump = lerp(v, frac(v + _VerticalJump.y), _VerticalJump.x);
 		// Horizontal Shake 
-		float shake = (nrand(_Time.x, 2) - 0.5)* _HorizontalShake;
+		float shake = (nrand(_Time.x, 2) - 0.5) * _HorizontalShake;
 		// Colour Drift
-		float drift = sin(jump + _ColourDrift.y)* _ColourDrift.x;
+		float drift = sin(jump + _ColourDrift.y) * _ColourDrift.x;
 		half4 src1 = tex2D(_MainTex, frac(float2(u + jitter + shake, jump)));
 		half4 src2 = tex2D(_MainTex, frac(float2(u + jitter + shake + drift, jump)));
-		return half4(src1.r, src2.g, scr1.b, 1);
+		return half4(src1.r, src2.g, src1.b, 1);
 	}
 		ENDCG
 		SubShader
@@ -42,10 +41,10 @@
 			ZTest Always Cull Off ZWrite Off
 			CGPROGRAM
 			#pragma vertex vert_img
-			#pragma Fragment frag
+			#pragma fragment frag
 			#pragma target 3.0
 			ENDCG
 		}
-	};
+	}
 
 }

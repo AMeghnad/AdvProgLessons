@@ -40,11 +40,11 @@ public class AnalogGlitch : MonoBehaviour
     #endregion
     #region Private Properties
     [SerializeField]
-    Shader _shader;
+    public Shader _shader;
     Material _material;
     float _verticalJumpTime;
     #endregion
-    #region Functions
+    #region MonoBehaviour Functions
     void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
         if (_material == null)
@@ -65,7 +65,7 @@ public class AnalogGlitch : MonoBehaviour
         _material.SetFloat("_HorizontalShake", _horizontalShake * 0.2f);
 
         var cd = new Vector2(_colourDrift * 0.04f, Time.time * 606.11f);
-        _material.SetVector("_ColorDrift", cd);
+        _material.SetVector("_ColourDrift", cd);
 
         Graphics.Blit(source, destination, _material);
     }
